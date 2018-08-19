@@ -78,29 +78,19 @@ void build_histogram(int *array, int no_of_elements, int bins){
 //}
 
 void main(){
-    int *matrix1, *matrix2, *matrices[TOTAL_MATRICES];
+//    int matrices[TOTAL_MATRICES][MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
+    int matrix1[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
+    int matrix2[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
 //    int matrices[TOTAL_MATRICES];
     int row_lis[TOTAL_MATRICES];
     int col_lis[TOTAL_MATRICES];
-    for(int matrix=0; matrix<TOTAL_MATRICES; matrix++){
-        static int row, col;
-        printf("Matrix %d:\nsize: ", matrix+1);
-        scanf("%d %d", &row, &col);
-        static int matrix_ptr[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
-        for(int i=0; i<row; i++){
-            for(int j=0; j<col; j++) {
-                printf("a[%d][%d]: ", i, j);
-                scanf("%d", (matrices[matrix] + i*col + j));
-            }
-        }
-        row_lis[matrix] = row;
-        col_lis[matrix] = col;
-//        matrices[matrix] = ((int *)matrix_ptr);
-
-        display_matrix(matrices[matrix], row, col);
-    }
-    printf("check-----\n");
-    for(int m=0; m < TOTAL_MATRICES; m++)
-        display_matrix(matrices[m], row_lis[m], col_lis[m]);
-//    matrix_multiply(matrices[0], matrices[1], row_lis[0], col_lis[0], row_lis[1], col_lis[1]);
+    printf("Matrix\nsize: ");
+    scanf("%d %d", &row_lis[0], &col_lis[0]);
+    get_matrix_values(matrix1, row_lis[0], col_lis[0]);
+    printf("Matrix\nsize: ");
+    scanf("%d %d", &row_lis[1], &col_lis[1]);
+    get_matrix_values(matrix2, row_lis[1], col_lis[1]);
+    display_matrix(matrix1, row_lis[0], col_lis[0]);
+    display_matrix(matrix2, row_lis[1], col_lis[1]);
+    matrix_multiply(matrix1, matrix2, row_lis[0], col_lis[0], row_lis[1], col_lis[1]);
 }

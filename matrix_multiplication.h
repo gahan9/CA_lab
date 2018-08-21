@@ -6,10 +6,8 @@
 #define CA_LAB_MATRIX_MULTIPLICATION_H
 
 void run_matrix_multiplication(){
-//    int matrices[TOTAL_MATRICES][MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
     int matrix1[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
     int matrix2[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
-//    int matrices[TOTAL_MATRICES];
     int row_lis[TOTAL_MATRICES];
     int col_lis[TOTAL_MATRICES];
     printf("Matrix\nsize: ");

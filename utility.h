@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <time.h>
 //extern int DEBUG;
 
 int write_log(const char *format, ...) {
@@ -57,6 +58,8 @@ void get_matrix_values(double array[][MAX_MATRIX_SIZE], int row, int col){
 }
 
 void matrix_multiply(double matrix1[][MAX_MATRIX_SIZE], double matrix2[][MAX_MATRIX_SIZE], int row1, int col1, int row2, int col2){
+    clock_t t;
+    double cpu_time_consumption;
     if(col1 != row2){
         printf("Invalid order or matrix multiplication not possible");
 //        return 0;
@@ -64,6 +67,8 @@ void matrix_multiply(double matrix1[][MAX_MATRIX_SIZE], double matrix2[][MAX_MAT
     else{
         double result[][MAX_MATRIX_SIZE] = {{0}};
         int i, j, k;
+        t = clock();
+#pragma omp parallel for
         for(i=0; i < row1; i++){
             for(j=0; j < col2; j++){
 //                write_log("[%d][%d]-> %d x %d\n", i, j, matrix1[i][j], matrix2[j][i]);
@@ -72,6 +77,9 @@ void matrix_multiply(double matrix1[][MAX_MATRIX_SIZE], double matrix2[][MAX_MAT
                 }
             }
         }
+        t = clock() - t;
+        cpu_time_consumption = ((double) (t)) / CLOCKS_PER_SEC;
+        printf("\n>>:: %f\n", cpu_time_consumption);
         display_matrix(result, row1, col2);
 //        return result;
     }

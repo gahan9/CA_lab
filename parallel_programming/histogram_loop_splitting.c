@@ -162,5 +162,5 @@ int main() {
 		printf(" %d \n", histogram[x]);
 	}
 	printf("\n");
-	return -1;
+	return 1;
 }

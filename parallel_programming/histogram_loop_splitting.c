@@ -92,7 +92,8 @@ void spin_lock(int *lok) {
 	operations.sem_num=0;
 	operations.sem_op=-1;
 	operations.sem_flg=0;
-	semop(*lok, &operations, 1);
+	// semop(int semid, struct sembuf *sops, size_t nsops);
+	semop(*lok, &operations, 1); // Operate on semaphore.
 }
 
 void spin_unlock(int *lok) {
@@ -113,15 +114,12 @@ char * shared(int size, int *shmid) {
 int main() {
 	// Declaration
 	int *shmid, i, *lock, pid, no_process=MAXBINS;
-	int *cond, *histogram,bin;
+	int *condition, *histogram,bin;
 	float *array_max, *array_min, *array, bin_size;
 
 	array_max = (float*) malloc(sizeof(float));
 	array_min = (float*) malloc(sizeof(float));
 	shmid = (int*) malloc(sizeof(int));
-
-	cond =(int*) malloc(sizeof(int));
-	*cond = 0;
 
 	// generate array in shared memory with random number
 	array = (float*)shared(MAXLEN*sizeof(float), shmid);
@@ -133,7 +131,12 @@ int main() {
 	for (i=0; i<MAXBINS; i++)
 		histogram[i]=0;
 	
+	// Set up locking semaphore mechanism
 	lock = (int *)shared (4, shmid);
+	condition =(int*) malloc(sizeof(int));
+	*condition = 0;
+	spin_lock_init(lock, condition);
+
 	min_max(array, MAXLEN, array_max, array_min); // get min and max of array
 
 	bin_size = (*array_max - *array_min) / MAXBINS; // calculate bin size

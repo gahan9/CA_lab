@@ -2,6 +2,7 @@
     Parallization for histogram
     Author: Gahan Saraiya
 	website: gahan9.github.io
+	code: https://github.com/gahan9/CA_lab/blob/master/parallel_programming/histogram_loop_splitting.c
     Date : 13/09/2018
 */
 

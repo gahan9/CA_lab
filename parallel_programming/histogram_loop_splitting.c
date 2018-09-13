@@ -68,7 +68,7 @@ int process_join(int process_id, int number_of_process) {
 }
 
 
-void spin_lock_init(int* lok, int* condition) {
+void spin_lock_init(int* lock, int* condition) {
 	/*
 	IPC_PRIVATE: Interprocess Communication within block
 	0666|IPC_CREAT: A new set of nsems semaphores is created with permission 0666
@@ -76,8 +76,7 @@ void spin_lock_init(int* lok, int* condition) {
 	*/
 	int control, lok1;
 	// semget(key_t key, int nsems, int semflg);
-	lok1 = semget(IPC_PRIVATE, 1, 0666|IPC_CREAT);  // get semaphore set identifier associated with the argument key IPC_PRIVATE or create 
-	*lok = lok1;
+	*lock = semget(IPC_PRIVATE, 1, 0666|IPC_CREAT);  // get semaphore set identifier associated with the argument key IPC_PRIVATE or create 
 	if (*condition == 0)
 		control = 1;
 	else

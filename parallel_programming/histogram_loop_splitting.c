@@ -31,19 +31,18 @@ int write_log(const char *format, ...) {
     }
 }
 
-void min_max(float *array, int n,float *amax,float *amin) {
+void min_max(float *array, int n, float *array_max, float *array_min) {
     write_log("calculating min and max of array\n");
 	int i;
-	*amax= *array;
-	*amin= *array;
+	*array_max = *array;
+	*array_min = *array;
 	for (i=0;i<n;i++)
 	{
-		if (array[i]>*amax)
-			*amax=array[i];
-		if (array[i]<*amin)
-			*amin=array[i];
+		if (array[i] > *array_max)
+			*array_max = array[i];
+		if (array[i] < *array_min)
+			*array_min = array[i];
 	}
-	write_log("calculating min and max of array\n");
 }
 
 

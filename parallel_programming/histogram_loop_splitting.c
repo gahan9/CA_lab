@@ -83,7 +83,7 @@ void spin_lock_init(int* lock, int* condition) {
 		control = 0;
 
 	// semctl(int semid, int semnum, int cmd, ...);
-	semctl(*lok, 0, SETVAL, control);  // Semaphore control operation.
+	semctl(*lock, 0, SETVAL, control);  // Semaphore control operation.
 	// performs the control operation specified by cmd on the semaphore set 
 }
 

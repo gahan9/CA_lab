@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <omp.h>
 //#include <graphics.h>
 #include "constant.h"
 #include "utility.h"

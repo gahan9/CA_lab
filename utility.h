@@ -44,15 +44,16 @@ void display_matrix(double array[][MAX_MATRIX_SIZE], int row, int col){
     }
 }
 
-void get_matrix_values(double array[][MAX_MATRIX_SIZE], int row, int col){
+void get_matrix_values(double array[][MAX_MATRIX_SIZE], int row, int col, int user_input){
     // display given array of given size(no. of elements require because sizeof() returns max bound value)
 //    write_log("%d x %d matrix:\n", row, col);
     static int i, j;
-
-    for(i=0; i<row; i++){
-        for(j=0; j<col; j++) {
-            printf("[%d][%d]: ", i, j);
-            scanf("%lf", &array[i][j]);
+    if (user_input) {
+        for (i = 0; i < row; i++) {
+            for (j = 0; j < col; j++) {
+                printf("[%d][%d]: ", i, j);
+                scanf("%lf", &array[i][j]);
+            }
         }
     }
 }
@@ -62,13 +63,12 @@ void matrix_multiply(double matrix1[][MAX_MATRIX_SIZE], double matrix2[][MAX_MAT
     double cpu_time_consumption;
     if(col1 != row2){
         printf("Invalid order or matrix multiplication not possible");
-//        return 0;
     }
     else{
         double result[][MAX_MATRIX_SIZE] = {{0}};
         int i, j, k;
         t = clock();
-#pragma omp parallel for
+        #pragma omp parallel for
         for(i=0; i < row1; i++){
             for(j=0; j < col2; j++){
 //                write_log("[%d][%d]-> %d x %d\n", i, j, matrix1[i][j], matrix2[j][i]);

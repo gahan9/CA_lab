@@ -1,15 +1,30 @@
-\documentclass{beamer}
-\usepackage{tabularx}
-\usepackage{beamerthemeCambridgeUS}
+\documentclass[xcolor=x11names,table]{beamer}
+\usepackage{beamerthemeCambridgeUS}  % CambridgeUS theme
+\usepackage{float}  % perfect fit graphic with command [H]
+%\usepackage{tabularx}  % alternate to tabular to use X to wrap column data properly
 %\usetheme{Antibes}
 \usepackage{hyperref}
+
+%package for timeline
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[TS1,T1]{fontenc}
+\usepackage{fourier, heuristica}
+\usepackage{array, booktabs}
+%\usepackage[x11names]{xcolor}
+%\usepackage{caption}
+%\DeclareCaptionFont{blue}{\color{LightSteelBlue3}}
+
+\newcommand{\foo}{\color{LightSteelBlue3}\makebox[0pt]{\textbullet}\hskip-0.5pt\vrule width 1pt\hspace{\labelsep}}
+
+
+
 % for themes, etc.
 %\mode<presentation>
 %{ \usetheme{boxes} }
 
 \usepackage{times}  % fonts
-\usepackage{graphicx}
-
+\usepackage{graphicx, wrapfig} % for graphics
 
 
 %colours
@@ -19,6 +34,7 @@
 \newcommand{\FR}[2]{
 	{\textstyle \frac{#1}{#2} }}
 \def\RR{\mathbb{R}}
+
 
 
 % macros
@@ -147,12 +163,17 @@
 		\newpage
 		
 		\item \textbf{Biomedical Simulations}
-		\begin{itemize}
-			\item simulate molecular structures
-			\item Using D-wave One quantum computer researchers from Harvard University solved the puzzle of how some proteins fold in year 2012 
-		\end{itemize}
-		\item \textbf{Biomedical Simulations}
-
+			\begin{itemize}
+				\item simulate molecular structures
+				\item Using D-wave One quantum computer researchers from Harvard University solved the puzzle of how some proteins fold in year 2012 
+			\end{itemize}
+		
+		\item \textbf{Financial Services}
+			\begin{itemize}
+				\item complex financial modeling and risk management within the financial industry
+				\item new ways to model financial data
+				\item isolate primary global risk factors
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -213,6 +234,33 @@
 	\begin{block}{\textbf{Photonic Circuits}}
 		qubits are photons driven in silicon circuits
 	\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Timeline}
+	\begin{table}
+		\renewcommand\arraystretch{1.1}\arrayrulecolor{LightSteelBlue3}
+%		\captionsetup{singlelinecheck=false, font=blue, labelfont=sc, labelsep=quad}
+%		\caption{Timeline}\vskip -1.5ex
+		\begin{tabular}{@{\,}r <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{5cm} l}
+%			\toprule
+%			\addlinespace[1.5ex]
+			May, 2011 & D-Wave One (Ranier) & 128qb \\
+			2013 & D-Wave Two & 512 qb \\
+			2015 & D-Wave 2X & 1152 qb \\
+			2016 & IBM Q Experience 5 & 5qb \\
+			2017 & Google & 20 qb \\
+			2017 & D-Wave 2000Q & 2000 qb \\
+			May, 2017 & IBM Q 16 & 16 qb \\
+			May, 2017 & IBM Q 17 & 17 qb \\
+			October, 2017 & Intel 17-Qubit Superconducting Test Chip & 17 qb \\
+			November, 2017 & IBM Q 20 & 20 qb \\
+			2017 & Rigetti 19Q & 19 qb \\
+			January 2018 & Intel Tangle Lake & 49 qb \\
+			March 2018 & Google Bristlecone & 72 qb \\
+		\end{tabular}
+	\end{table}
+\end{frame}
 
 %	\begin{table}[H]
 %	\centering
@@ -234,7 +282,6 @@
 %			qubits are photons driven in silicon circuits
 %		\end{tabularx}
 %	\end{table}
-\end{frame}
 
 
 \end{document}

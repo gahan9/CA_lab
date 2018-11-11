@@ -1,0 +1,492 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% Computer Architecture
+% Term Paper Presentation: Turing Architecture
+%
+% Gahan M. Saraiya
+% 18MCEC10
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------------------
+%       PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[xcolor=x11names,table]{beamer}
+%\usepackage{beamerthemeCambridgeUS}  % CambridgeUS theme
+% for themes, etc.
+%\mode<presentation>
+%{ \usetheme{boxes} }
+
+\usetheme{EastLansing}
+\usepackage{float}  % perfect fit graphic with command [H]
+%\usepackage{tabularx}  % alternate to tabular to use X to wrap column data properly
+%\usetheme{Antibes}
+\usepackage{hyperref}
+
+%package for timeline
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[TS1,T1]{fontenc}
+\usepackage{fourier, heuristica}
+\usepackage{array, booktabs}
+\usepackage{longtable}
+\usepackage{makecell}
+%\usepackage[x11names]{xcolor}
+%\usepackage{caption}
+%\DeclareCaptionFont{blue}{\color{LightSteelBlue3}}
+
+\newcommand{\foo}{\color{LightSteelBlue3}\makebox[0pt]{\textbullet}\hskip-0.5pt\vrule width 1pt\hspace{\labelsep}}
+\usepackage{times}  % fonts
+\usepackage{graphicx, wrapfig} % for graphics
+
+\usepackage{movie15}
+
+\usepackage{scrextend}
+%colours
+\definecolor{lightblue}{rgb}{0.1, 0.1, 0.6}
+\definecolor{maroon}{rgb}{0.3, 0.1, 0.7}
+
+\newcommand{\FR}[2]{
+	{\textstyle \frac{#1}{#2} }}
+\def\RR{\mathbb{R}}
+% macros
+\newcommand{\hhq}{{\scriptstyle{{\frac{1}{4}}}}}
+\newcommand\hf{\textstyle{1\over 2 }\displaystyle}
+\newcommand\hhf{\scriptstyle{1\over 2 }\displaystyle}
+\newcommand{\erf}{\mathrm{erf}}
+\def\h{\textcolor{red}{\mathbf{h}}}
+\def\z{\textcolor{maroon}{\mathbf{z}}}
+\newcommand{\zave}{\z_{\mathrm{ave}}}
+\def\by{\textcolor{lightblue}{\mathbf{y}}}
+\def\bv{\textcolor{blue}{\mathbf{v}}}
+\def\bx{\textcolor{red}{\mathbf{x}}}
+\def\bp{\textcolor{maroon}{\mathbf{p}}}
+\makeatother
+
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+\newcommand*\tick{\item[\Checkmark]}
+\newcommand*\arrow{\item[$\Rightarrow$]}
+\newcommand*\fail{\item[\XSolidBrush]}
+\usepackage{minted} % for highlighting code sytax
+\definecolor{LightGray}{gray}{0.9}
+
+\setminted[text]{
+	frame=lines, 
+	breaklines,
+	baselinestretch=1.2,
+	bgcolor=LightGray,
+	%	fontsize=\small
+}
+
+\setminted[python]{
+	frame=lines, 
+	breaklines, 
+	linenos,
+	baselinestretch=1.2,
+	%	bgcolor=LightGray,
+	%	fontsize=\small
+}
+%----------------------------------------------------------------------------------------
+%       GRAPH PLOTING CONFIG
+%----------------------------------------------------------------------------------------
+\usepackage{pgfplotstable}
+
+\usetikzlibrary{backgrounds}
+% background color definition from pgfmanual-en-macros.tex
+\definecolor{graphicbackground}{cmyk}{0.04,0.02,0.02,0.04}
+% key to change color
+\pgfkeys{/tikz/.cd,
+	background color/.initial=graphicbackground,
+	background color/.get=\backcol,
+	background color/.store in=\backcol,
+}
+\tikzset{background rectangle/.style={
+		fill=\backcol,
+	},
+	use background/.style={
+		show background rectangle
+	}
+}
+
+%----------------------------------------------------------------------------------------
+%       CUSTOMIZE BEAMER FOOTER
+%----------------------------------------------------------------------------------------
+\setbeamertemplate{footline}
+{
+	\leavevmode%
+	\hbox{%
+		\begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+			\usebeamerfont{author in head/foot}\insertshortauthor
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+			\usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+%			\insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+		\end{beamercolorbox}}%
+	\vskip0pt%
+}
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%       TITLE SECTION
+%----------------------------------------------------------------------------------------
+\title{Turing Architecture}
+\author{Gahan M. Saraiya (18MCEC10)}
+\institute{M.Tech (Computer Science and Engineering) 
+	\\ Institute of Technology, Nirma University, Ahmedabad}
+\date{{\scriptsize November 2018}}
+
+% note: do NOT include a \maketitle line; also note that this title
+% material goes BEFORE the \begin{document}
+
+% Recurring Outline for every section, with highlighting
+\AtBeginSection[]
+{ \begin{frame}<beamer> 
+	\frametitle{Outline of Talk}
+	\tableofcontents[currentsection]%[pausesections]
+\end{frame} }
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdfauthor={Gahan Saraiya},
+	pdfcreator={Gahan Saraiya},
+	pdfproducer={Gahan Saraiya},
+}
+
+
+%----------------------------------------------------------------------------------------
+%       BEGIN DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Introduction}
+	\begin{frame}[allowframebreaks]
+	\frametitle{What is Turing Architecture?}
+		\begin{itemize}
+			\item codename for a GPU microarchitecture developed by Nvidia
+			\item Successor of \href{https://en.wikipedia.org/wiki/Volta_(microarchitecture)}{Volta}
+			\item named after well known mathematician and computer scientist \href{https://en.wikipedia.org/wiki/Alan_Turing}{Alan Turing}
+			\item the first consumer product with capability of real-time \hyperref[ray-tracing]{ray-tracing}
+			\item NVIDIA partnered with Microsoft to enable full RTX support via \href{https://blogs.msdn.microsoft.com/directx/2018/03/19/announcing-microsoft-directx-raytracing/}{Microsoft’s new DirectX Raytracing (DXR) API}
+			\item TU102 GPU includes \textbf{18.6 billion transistors} fabricated on TSMC’s 12 nm FFN (FinFET NVIDIA) high-performance manufacturing process
+		\end{itemize}
+		\begin{figure}[H]
+			\includegraphics[width=240px]{refs/NVIDIA-Turing-Architecture-TU102}
+			\caption{Turing Architecture in TU102}
+		\end{figure}
+	\end{frame}
+	
+%	\usebackgroundtemplate{
+%		tikz\node[opacity=0.1]{
+%		\includegraphics[width=\paperwidth,height=\paperheight]{refs/Nvidia-GeForce-RTX-2080-Ti-1}
+%		}
+%	} 
+	\begin{frame}
+	\frametitle{Overview of Product}
+		\begin{table}[H]
+			\vspace{-1cm}
+			\hspace{-0.55cm}
+%			\newcolumntype{L}{>{\centering\arraybackslash}m{4cm}}
+			\begin{tabular}{ m{4cm} l }
+				{\begin{figure}[H]
+						\includegraphics[width=100px]{refs/geforce-rtx-2080-ti-web-tech-shot-630-u}
+						\caption{{\footnotesize RTX 2080 Ti}}
+				\end{figure}}
+				&
+				\makecell{ 
+					14.2 TFLOPS\footnote[1]{Based on GPU boost clock\label{note1}} of peak single precision (FP32)
+					\\ 113.8 Tensor TFLOPS
+					\\ 10 Giga Rays/sec
+					\\ 78 Tera RTX-OPS
+				}
+				\\
+				\vspace{-0.5cm}
+				{\begin{figure}[H]
+						\includegraphics[width=100px]{refs/pre-order-quadro-rtx-6000-front-badge-r2-407-d.jpg}
+						\caption{{\footnotesize QUADRO RTX 6000}}
+				\end{figure}}
+				&
+				\makecell{
+					16.3 TFLOPS\footnotemark[1] of peak single precision (FP32)
+					\\ 130.5 Tensor TFLOPS
+					\\ 10 Giga Rays/sec
+					\\ 84 Tera RTX-OPS
+				}
+			\end{tabular}
+		\end{table}
+	\end{frame}
+
+\section{Applications}
+	\begin{frame}[allowframebreaks]
+	\frametitle{Quadro}
+	
+	\end{frame}
+
+
+\section{Comparing with Predecessor}
+	\begin{frame}[allowframebreaks]
+	\frametitle{The New Features}
+		\begin{block}{RT Cores for Real-Time Ray Tracing}
+			{\small helps single GPU to render realistic \textbf{cinematic-quality 3D games, complex professional models} with accurate shadows, reflections, refractions.
+			\\ The Turing architecture is armed with dedicated ray-tracing processors called RT Cores that accelerate the computation of how light and sound travel in 3D environments by up to 10 Giga Rays per second.}
+		\end{block}
+		\begin{block}{Tensor Cores for AI Acceleration}
+			{\small Tensor Cores - processors that accelerate deep learning training and inference, providing up to \textbf{500 trillion tensor operations per second}.
+			\\ This level of performance dramatically accelerates AI-enhanced features—such as denoising, resolution scaling, and video re-timing—creating applications with powerful new capabilities.}
+		\end{block}
+		\begin{block}{New Streaming Multiprocessor}
+			{\small The Turing architecture dramatically improves raster performance over the previous-generation Pascal with an enhanced graphics pipeline and new programmable shading technologies (variable-rate shading, texture-space shading, and multi-view rendering).
+			}
+		\end{block}
+		\begin{block}{CUDA For Simulation}
+			{\small Turing-based GPUs feature a new streaming multiprocessor (SM) architecture that supports \textbf{up to 16 trillion floating-point operations} in parallel with 16 trillion integer operations per second. 
+			\\ Developers can take advantage of up to 4,608 CUDA cores with NVIDIA CUDA 10, FleX, and PhysX software development kits (SDKs) to create complex simulations, such as particle or fluid dynamics for scientific visualization, virtual environments, and special effects.}
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Ray Tracing}
+		Turing improves Ray tracing up to 6X compared to Volta
+		\centering
+		\begin{tikzpicture}[use background]
+			\pgfplotstableread[row sep=\\]{ % Read the data into a table macro
+				Label                                      		First   Second\\
+				{PASCAL}										0     	308\\
+				{DGX 4-VOLTAS RT}                               0     	55\\
+				{TURING}                         				0     	45\\
+			}\datatable
+			
+			\begin{axis}[
+				xbar stacked,   % Stacked horizontal bars
+				xmin=0,  xmax=350,       % Start x axis at 0
+%				title={\large \textbf {Gantt Chart }},
+				height=3cm, width=10cm,
+				bar width=0.4cm,
+				axis x line*=bottom,
+				axis y line*=left,
+				y axis line style={opacity=1},
+				enlarge y limits=true,
+				xmajorgrids={true},
+				grid style={
+					solid,
+					ultra thin,
+					gray
+				},
+				tick style={tickwidth=0cm,major tick length=0cm},
+				xlabel={\textbf{rendering time in $ ms $}},
+				xtick ={50,308},
+				yticklabel style={font=\small\bfseries},
+				ytick=data,     % Use as many tick labels as y coordinates
+				yticklabels from table={\datatable}{Label}  % Get the labels from the Label column of the \datatable
+				]
+				\addplot [draw=none,fill=blue] table [x=First, y expr=\coordindex] {\datatable};    % Plot the "First" column against the data index
+				\addplot [draw=none,fill=blue]table [x=Second, y expr=\coordindex] {\datatable};
+			\end{axis}
+		\end{tikzpicture}
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]
+	\frametitle{Comparing Workstation GPU}
+
+%			\def\arraystretch{1.5}
+			\begin{longtable}{c | l | l}
+				 & \theadfont Quadro RTX 6000 & \theadfont Volta 100
+				 \\
+				 \hline
+				 \makecell{CUDA Parallel-\\Processing Cores} & 4608 & 5120
+				 \\
+				 \hline
+				 Architecture & Turing & Volta
+				 \\
+				 \hline
+				 Code Name & TU102 & GV100
+				 \\
+				 \hline
+				 Transistor count & 18,600 million & 21,100 million
+				 \\
+				 \hline
+				 Transistors & 12nm & 12nm
+				 \\
+				 \hline
+				 \makecell{Core \\clock speed} & 1440 MHz & 1132 MHz
+				 \\
+				 \hline
+				 \makecell{Memory \\clock speed} & 12000 MHz & 1696 MHz
+				 \\
+				 \hline
+				 \makecell{Tensor Cores} & 576 & 640
+				 \\
+				 \hline
+				 \makecell{\hyperref[rtcore]{RT Cores}} & 72 & -
+				 \\
+				 \hline		
+				 GPU Memory & 24 GB GDDR6 & 32 GB HBM2
+				 \\
+				 \hline
+				 \hyperref[ray-tracing]{RTX-OPS} & 84T & -
+				 \\
+				 \hline
+				 \hyperref[ray-tracing]{Rays Cast} & 10 Giga Rays/Sec & -
+				 \\
+				 \hline
+				 \makecell{FP32 \\Performance} & 16.3 TFLOPS & 14.8 TFLOPS
+				 \\
+				 \hline
+				 \makecell{Tensor \\Performance} & 16.3 TFLOPS & 130.5 TFLOPS
+				 \\
+				 \hline
+				 \makecell{Max Power \\Consumption} & 295 W & 250 W
+				 \\
+				 \hline
+				 Graphics Bus & PCI Express 3.0 x 16 & PCI Express 3.0 x 16
+				 \\
+				 \hline
+				 \makecell{Display \\Connectors} & \makecell{DP 1.4 (4),\\ VirtualLink (1)} & \makecell{DP 1.4 (4)}
+				 \\
+				 \hline
+				 Form Factor & \makecell{4.4" H $\times$ 10.5" L\\ Dual Slot} & \makecell{4.4" H $\times$ 10.5" L \\Dual Slot}
+				 \\
+				 \hline
+				 Release date & 13 August 2018 & 27 March 2018
+				 \\
+				 \hline
+				 Launch Price & \$6299 & \$8999
+			\end{longtable}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{figure}[H]
+			\includegraphics[width=270px]{refs/NVIDIA-RTX-Turing-GPU_19-1}
+		\end{figure}
+	\end{frame}
+
+\section{In to the Architecture}
+	\begin{frame}[allowframebreaks]
+		\frametitle{Tensor Core}
+		\begin{figure}[H]
+			\begin{itemize}
+				\item Tesla T4 introduces NVIDIA Turing Tensor Core technology with multi-precision computing for the world’s most efficient AI inference. 
+				
+				\item Turing Tensor Cores provide a full range of precisions for inference, from FP32 to FP16 to INT8, as well as INT4, to provide giant leaps in performance over NVIDIA Pascal® GPUs.
+				
+				\item however it's predecessor Nvidia V100 GPU (Volta) having first-generation Tensor Cores can only deliver performance with mixed-precision matrix multiply in FP16 (12X compare to PASCAL) and FP32(6X compare to PASCAL)
+			\end{itemize}
+			\includegraphics[width=270px]{refs/turing-throughput-tensor.jpg}
+			\caption{Turing Tensor core throughput comparison}
+		\end{figure}
+	\end{frame}
+
+\section{Terminologies}
+	\begin{frame}[allowframebreaks]
+	\frametitle{Terminologies}
+		\begin{itemize}
+			\item Rasterization
+			\label{rasterization}
+			\\ {\scriptsize 
+				From a mesh of virtual triangles or polygons objects on the screen are created which indeed create 3D models of objects. In this virtual mesh, the corners of each triangle — known as vertices — intersect with the vertices of other triangles of different sizes and shapes.
+			}
+			\item \href{https://developer.nvidia.com/rtx/raytracing}{Real-Time Ray Tracing}
+			\label{ray-tracing}
+			\\ {\scriptsize 
+				helps single GPU to render realistic cinematic-quality 3D games, complex professional models with accurate shadows, reflections, refractions.
+			}
+			\item RT Core
+			\label{rtcore}
+			\\ {\scriptsize 
+				helps single GPU to render realistic 3D games, complex professional models with accurate shadows, reflections, refractions.
+			}
+			\item \href{https://www.nvidia.com/en-us/data-center/tensorcore/}{Tensor Core}
+			\label{tensorcore}
+			\\ {\scriptsize 
+				can accelerate large matrix operations
+				\\ perform mixed-precision matrix multiply and accumulate calculations in a single operation
+				\\ With hundreds of Tensor Cores operating in parallel in one NVIDIA GPU, this enables massive increases in throughput and efficiency
+			}
+		\end{itemize}
+	\end{frame}
+
+
+%\section{Quantum Architecture}
+%
+%\begin{frame}[allowframebreaks]
+%\frametitle{Applications}
+%	\begin{itemize}
+%		\item \textbf{Optimization}
+%			\begin{itemize}
+%				\item systems design
+%			\end{itemize}
+%		\newpage
+%		
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}[allowframebreaks]
+%\frametitle{Top Quantum Computing Companies}
+%	\begin{itemize}
+%		\item \href{https://www.dwavesys.com/}{D-wave Systems}
+%			\\ {\scriptsize
+%				World's first Quantum Computing Company
+%				\\ integrates new discoveries in physics, engineering, manufacturing and computer science into computational breakthrough approaches to solve most complex challenges.
+%			}
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Types of Quantum Processor}
+%	\begin{block}{\textbf{Silicon Spin Qubits}}
+%		Electrons or nuclear spins on a solid subtract
+%	\end{block}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Timeline}
+%	\begin{table}
+%		\renewcommand\arraystretch{1.1}\arrayrulecolor{LightSteelBlue3}
+%%		\captionsetup{singlelinecheck=false, font=blue, labelfont=sc, labelsep=quad}
+%%		\caption{Timeline}\vskip -1.5ex
+%		\begin{tabular}{@{\,}r <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{5cm} l}
+%%			\toprule
+%%			\addlinespace[1.5ex]
+%			May, 2011 & D-Wave One (Ranier) & 128qb \\
+%			2013 & D-Wave Two & 512 qb \\
+%		\end{tabular}
+%	\end{table}
+%\end{frame}
+
+
+%	\begin{table}[H]
+%	\centering
+%		\begin{tabularx}{\linewidth}{ r X }
+%			\textbf{Silicon Spin Qubits}
+%			& 
+%			Electrons or nuclear spins on a solid subtract
+%			\\ 
+%			\textbf{Superconducting Circuits}
+%			& 
+%			currents superposition around superconductor
+%			\\ 
+%			\textbf{Ion's Trap}
+%			& 
+%			Trap ions in electric fields
+%			\\
+%			\textbf{Photonic Circuits}
+%			&
+%			qubits are photons driven in silicon circuits
+%		\end{tabularx}
+%	\end{table}
+
+
+\end{document}
+

@@ -25,6 +25,7 @@
 
 \usepackage{times}  % fonts
 \usepackage{graphicx, wrapfig, caption} % for graphics
+\usepackage{multimedia}  % for media playback
 \usepackage{multirow}
 
 
@@ -150,184 +151,223 @@
 		\frametitle{GPU - Graphics Processing Unit}
 		\begin{figure}[!h]
 			\centering
-			\includegraphics[width=\linewidth,height=\dimexpr\textheight-2\baselineskip-\abovecaptionskip-\belowcaptionskip\relax,keepaspectratio]{refs/Typical-NVIDIA-GPU-architecture-The-number-of-SMXs-and-the-computation-resources-inside.png}
+			\includegraphics[keepaspectratio=true,height=0.8\textheight]{refs/memory-hierarchy.png}
 			\label{fig:gpu-architecture}
 		\end{figure}
+		\framebreak
+		
+		\begin{table}
+  			\newcommand{\ColWidth}{0.3\linewidth}
+			% https://tex.stackexchange.com/a/9938
+			\renewcommand\_{\textunderscore\allowbreak}
+			\begin{tabular}{|p{2in}|p{2in}|} \hline
+				CPU & GPU  \\ \hline \hline
+				<100 (typically 4 to 8) cores & 100s or 1000s of cores \\ \hline
+				Low latency & High Throughput \\ \hline
+				Serial Processing & Parallel Processing \\ \hline
+				Quick for Interactive Tasks & Breaks jobs into separate tasks to process simultaneously \\ \hline
+				Traditional Program for sequential execution & Requires Additional software to convert CPU function to GPU functions 	
+				\\ \hline
+			\end{tabular}
+		\end{table}
 	
-		\begin{figure}[!h]
+		\scriptsize {
+			More details at -  \href{https://www.run.ai/guides/multi-gpu/cpu-vs-gpu}{\textbf{\textcolor{blue}{link 1}}} 
+			,
+			\href{https://www.weka.io/learn/hpc/cpu-vs-gpu}{\textbf{\textcolor{blue}{link 2}}}
+			,
+			\href{https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu}{\textbf{\textcolor{blue}{Sample Code}}}
+		}
+		\framebreak
+		\begin{figure}[p]
 			\centering
-			\includegraphics[width=\linewidth,height=\dimexpr\textheight-2\baselineskip-\abovecaptionskip-\belowcaptionskip\relax,keepaspectratio]{refs/gpu-devotes-more-transistors-to-data-processing.png}
+			\includegraphics[width=\linewidth,height=0.8\textheight,keepaspectratio]{refs/gpu-devotes-more-transistors-to-data-processing.png}
+			\caption{Block Diagram of Memory Architecture of CPU and GPU}
 			\label{fig:cpu-gpu-architecture}
 		\end{figure}
+	\end{frame}
+		
+	\section{Quantum Architecture}
 	
-	    \begin{tabular}{|c|c|c|} \hline
-				Parameter & CPU & GPU  \\ \hline
-				interviewer
-		\end{tabular}
+	\begin{frame}
+		\centering
+		Quantum Mechanics at the core of what we use on everyday basis -- \href{https://www.youtube.com/watch?v=hLtfFJ6F3rc}{\textbf{\beamergotobutton{Qiskit - Quantum Isn't Spooky.}}}
 	\end{frame}
 
-	\begin{frame}{|c||l||r|}
+	\begin{frame}
 		\frametitle{QPU - Quantum Processing Unit}
 		\begin{figure}[p]
 			\centering
-			\includegraphics[width=\linewidth,height=\dimexpr\textheight-2\baselineskip-\abovecaptionskip-\belowcaptionskip\relax,keepaspectratio]{refs/QODA-slide-BEST-scaled.jpg}
+			\includegraphics[width=\linewidth,height=0.8\textheight,keepaspectratio]{refs/quantum_layers.jpg}
+			\caption{Layers of Quantum Computing}
 			\label{fig:qpu-architecture-nvidia-qoda}
 		\end{figure}
 	\end{frame}
-	
-	\section{Quantum Architecture}
-	
+
+
 	\begin{frame}[allowframebreaks]
-		\frametitle{Applications}
+		\frametitle{Quantum Roadmap}
+		\begin{figure}[p]
+			\centering
+			\includegraphics[width=\linewidth,height=0.7\textheight,keepaspectratio]{refs/ibm-quantum-development-roadmap.png}
+			\caption{IBM Quantum Development Roadmap}
+			\label{fig:ibm-quantum-roadmap}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}[allowframebreaks]
+		\frametitle{Applications Require Massively Parallel Computation}
 		\begin{itemize}
 			\item \textbf{Optimization}
 			\begin{itemize}
 				\item systems design
 				\item airline scheduling
-				\item mission planning
-				\item financial analysis
-				\item web search
-				\item cancer radiotherapy
-				\item Volkswagen was the first car manufacturer to use a quantum computer to calculate traffic flows. 
-				\item Recruit Communications and D-Wave - collaborated to apply quantum computing to marketing, advertising and communications. (optimize the efficiency of matching advertisements to customers for web advertising.)
 			\end{itemize}
-			\newpage
 			
 			\item \textbf{Machine Learning}
 			\begin{itemize}
 				\item Improving forecast capability with neural network
 				\item learn to recognize essences of objects by recognizing patterns in huge amount of data
-				\item native capability of D-Wave Quantum Processing Unit (QPU)
-				\item NASA scientists trained the D-Wave 2X system on image data sets in a generative unsupervised learning 
 			\end{itemize}
-			\newpage
 			
 			\item \textbf{Biomedical Simulations}
 			\begin{itemize}
 				\item simulate molecular structures
-				\item Using D-wave One quantum computer researchers from Harvard University solved the puzzle of how some proteins fold in year 2012 
 			\end{itemize}
 			
 			\item \textbf{Financial Services}
 			\begin{itemize}
 				\item complex financial modeling and risk management within the financial industry
-				\item new ways to model financial data
-				\item isolate primary global risk factors
 			\end{itemize}
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}[allowframebreaks]
-		\frametitle{Top Quantum Computing Companies}
-		\begin{itemize}
-			\item \href{https://www.dwavesys.com/}{D-wave Systems}
-			\\ {\scriptsize
-				World's first Quantum Computing Company
-				\\ integrates new discoveries in physics, engineering, manufacturing and computer science into computational breakthrough approaches to solve most complex challenges.
-			}
-			\item IBM Quantum Computing
-			\\ {\scriptsize Offers \href{https://quantumexperience.ng.bluemix.net/}{quantum experience} on cloud-enabled quantum computing platform
-				\\ allows user to run algorithms, experiments, work on qubits, simulation etc.}
-			\item Microsoft Quantum Computing
-			\\ {\scriptsize Conducts theoretical and experimental approaches to creating quantum computers}
-			\item Google Research
-			\\ {\scriptsize
-				Quantum Artificial Intelligence Lab - joint initiative of NASA, Universities Space Research Association and Google Research
-				\\ goal - how quantum computing help with machine learning and other complex problems of computer science
-				\\ Lab hosted at NASA's Ames Research Center
-			}
-			\item \href{www.toshiba.eu/eu/Cambridge-Research-Laboratory/Quantum-Information-Group/}{Toshiba Quantum Information Group}
-			\\ {\scriptsize
-				Research teams on Quantum Information, Speech Technology and Computer Vision.
-				\\ Collaboration with Cavendish Laboratory and Engineering Department of the University, Cambridge and Toshiba R\&D groups.
-			}
-			\item \href{https://newsroom.intel.com/tag/qutech/}{Intel}
-			\\ {\scriptsize 
-				10 year collaboration with institute \href{https://qutech.nl/qutechentersintocollaborationwithintel/}{QuTech}, Netherlands formed in 2013 by Delft University of Technology for Applied Research in Quantum Computers
-			}
-			\item Alibaba Quantum Computing Laboratory
-			\\ {\scriptsize
-				goal - bring study and applications to the next level, platform for connectivity, computing and information security
-			}
-			\item Cambridge Quantum Computing
-			\\ {\scriptsize
-				independent company - expertise in Quantum Information Processing, AI, Optimization and pattern recognition
-			}
-			\item And many more...
-			\\ {\scriptsize
-				HP Lab : Quantum Information Processing, 1QB Information Technologies, Lockheed Martin, Regetti, IONQ, QxBranch, Post-Quantum, ID Quantique, QuintessenceLabs, Quantum Biosystems
-			}
-		\end{itemize}
-	\end{frame}
+	\section{References}
 	
 	\begin{frame}
-		\frametitle{Types of Quantum Processor}
-		\begin{block}{\textbf{Silicon Spin Qubits}}
-			Electrons or nuclear spins on a solid subtract
-		\end{block}
-		\begin{block}{\textbf{Superconducting Circuits}}
-			currents superposition around superconductor
-		\end{block}
-		\begin{block}{\textbf{Ion's Trap}}
-			Trap ions in electric fields
-		\end{block}
-		\begin{block}{\textbf{Photonic Circuits}}
-			qubits are photons driven in silicon circuits
-		\end{block}
+		\frametitle{References}
+		\centering
+		\href{https://www.youtube.com/watch?v=dx98pqJvZVk}{\beamergotobutton{Multicore Programming}} \\
+		\href{https://www.youtube.com/watch?v=OWJCfOvochA}{\beamerbutton{Quantum Computing Expert Explains One Concept in 5 Levels of Difficulty | WIRED}} \\
+		\href{https://www.youtube.com/watch?v=zhQItO6_WoI}{\beamergotobutton{Quantum Computers Explained in a Way Anyone Can Understand}} \\
+		\href{https://www.explainingcomputers.com/quantum.html}{\beamergotobutton{Quantum Computing 2022 Update}} \\
+%		\href{}{\beamergotobutton{}} \\
+%		\href{}{\beamergotobutton{}} \\
+%		\href{}{\beamergotobutton{}} \\
 	\end{frame}
+
 	
-	\begin{frame}
-		\frametitle{Timeline}
-		\begin{table}
-			\renewcommand\arraystretch{1.1}\arrayrulecolor{LightSteelBlue3}
-			%		\captionsetup{singlelinecheck=false, font=blue, labelfont=sc, labelsep=quad}
-			%		\caption{Timeline}\vskip -1.5ex
-			\begin{tabular}{@{\,}r <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{5cm} l}
-				%			\toprule
-				%			\addlinespace[1.5ex]
-				May, 2011 & D-Wave One (Ranier) & 128qb \\
-				2013 & D-Wave Two & 512 qb \\
-				2015 & D-Wave 2X & 1152 qb \\
-				2016 & IBM Q Experience 5 & 5qb \\
-				2017 & Google & 20 qb \\
-				2017 & D-Wave 2000Q & 2000 qb \\
-				May, 2017 & IBM Q 16 & 16 qb \\
-				May, 2017 & IBM Q 17 & 17 qb \\
-				October, 2017 & Intel 17-Qubit Superconducting Test Chip & 17 qb \\
-				November, 2017 & IBM Q 20 & 20 qb \\
-				2017 & Rigetti 19Q & 19 qb \\
-				January 2018 & Intel Tangle Lake & 49 qb \\
-				March 2018 & Google Bristlecone & 72 qb \\
-			\end{tabular}
-		\end{table}
-	\end{frame}
+%	\begin{frame}[allowframebreaks]
+%		\frametitle{Top Quantum Computing Companies}
+%		\begin{itemize}
+%			\item \href{https://www.dwavesys.com/}{D-wave Systems}
+%			\\ {\scriptsize
+%				World's first Quantum Computing Company
+%				\\ integrates new discoveries in physics, engineering, manufacturing and computer science into computational breakthrough approaches to solve most complex challenges.
+%			}
+%			\item IBM Quantum Computing
+%			\\ {\scriptsize Offers \href{https://quantumexperience.ng.bluemix.net/}{quantum experience} on cloud-enabled quantum computing platform
+%				\\ allows user to run algorithms, experiments, work on qubits, simulation etc.}
+%			\item Microsoft Quantum Computing
+%			\\ {\scriptsize Conducts theoretical and experimental approaches to creating quantum computers}
+%			\item Google Research
+%			\\ {\scriptsize
+%				Quantum Artificial Intelligence Lab - joint initiative of NASA, Universities Space Research Association and Google Research
+%				\\ goal - how quantum computing help with machine learning and other complex problems of computer science
+%				\\ Lab hosted at NASA's Ames Research Center
+%			}
+%			\item \href{www.toshiba.eu/eu/Cambridge-Research-Laboratory/Quantum-Information-Group/}{Toshiba Quantum Information Group}
+%			\\ {\scriptsize
+%				Research teams on Quantum Information, Speech Technology and Computer Vision.
+%				\\ Collaboration with Cavendish Laboratory and Engineering Department of the University, Cambridge and Toshiba R\&D groups.
+%			}
+%			\item \href{https://newsroom.intel.com/tag/qutech/}{Intel}
+%			\\ {\scriptsize 
+%				10 year collaboration with institute \href{https://qutech.nl/qutechentersintocollaborationwithintel/}{QuTech}, Netherlands formed in 2013 by Delft University of Technology for Applied Research in Quantum Computers
+%			}
+%			\item Alibaba Quantum Computing Laboratory
+%			\\ {\scriptsize
+%				goal - bring study and applications to the next level, platform for connectivity, computing and information security
+%			}
+%			\item Cambridge Quantum Computing
+%			\\ {\scriptsize
+%				independent company - expertise in Quantum Information Processing, AI, Optimization and pattern recognition
+%			}
+%			\item And many more...
+%			\\ {\scriptsize
+%				HP Lab : Quantum Information Processing, 1QB Information Technologies, Lockheed Martin, Regetti, IONQ, QxBranch, Post-Quantum, ID Quantique, QuintessenceLabs, Quantum Biosystems
+%			}
+%		\end{itemize}
+%	\end{frame}
+	
+%	\begin{frame}
+%		\frametitle{Types of Quantum Processor}
+%		\begin{block}{\textbf{Silicon Spin Qubits}}
+%			Electrons or nuclear spins on a solid subtract
+%		\end{block}
+%		\begin{block}{\textbf{Superconducting Circuits}}
+%			currents superposition around superconductor
+%		\end{block}
+%		\begin{block}{\textbf{Ion's Trap}}
+%			Trap ions in electric fields
+%		\end{block}
+%		\begin{block}{\textbf{Photonic Circuits}}
+%			qubits are photons driven in silicon circuits
+%		\end{block}
+%	\end{frame}
+	
+%	\begin{frame}
+%		\frametitle{Timeline}
+%		\begin{table}
+%			\renewcommand\arraystretch{1.1}\arrayrulecolor{LightSteelBlue3}
+%			%		\captionsetup{singlelinecheck=false, font=blue, labelfont=sc, labelsep=quad}
+%			%		\caption{Timeline}\vskip -1.5ex
+%			\begin{tabular}{@{\,}r <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{5cm} l}
+%				%			\toprule
+%				%			\addlinespace[1.5ex]
+%				May, 2011 & D-Wave One (Ranier) & 128qb \\
+%				2013 & D-Wave Two & 512 qb \\
+%				2015 & D-Wave 2X & 1152 qb \\
+%				2016 & IBM Q Experience 5 & 5qb \\
+%				2017 & Google & 20 qb \\
+%				2017 & D-Wave 2000Q & 2000 qb \\
+%				May, 2017 & IBM Q 16 & 16 qb \\
+%				May, 2017 & IBM Q 17 & 17 qb \\
+%				October, 2017 & Intel 17-Qubit Superconducting Test Chip & 17 qb \\
+%				November, 2017 & IBM Q 20 & 20 qb \\
+%				2017 & Rigetti 19Q & 19 qb \\
+%				January 2018 & Intel Tangle Lake & 49 qb \\
+%				March 2018 & Google Bristlecone & 72 qb \\
+%			\end{tabular}
+%		\end{table}
+%	\end{frame}
 	
 	
 
 	
-	\begin{frame}[allowframebreaks]
-		\frametitle{Google AI Quantum}
-		\begin{block}{Superconducting qubit processors}
-			Superconducting qubits with chip-based scalable architecture targeting two-qubit gate error < 0.5\%. Google's Bristlecone is newest 72-qubit quantum processor\footnote{as on 2018}.
-		\end{block}
-		\begin{block}{Qubit metrology}
-			Reducing two-qubit loss below 0.2\% is critical for error correction.
-			\\ Working on a quantum supremacy experiment, to approximately sample a quantum circuit beyond the capabilities of state-of-the-art classical computers and algorithms.
-		\end{block}
-		\begin{block}{Quantum simulation}
-			Simulation of physical systems is among the most anticipated applications of quantum computing.
-			\\ quantum algorithms for modelling systems of interacting electrons with applications in chemistry and materials science.
-		\end{block}
-		\begin{block}{Quantum neural networks}
-			a framework to implement a quantum neural network on near-term processors.
-			\\ understanding advantages may arise from generate massive superposition states during operation of the network.
-		\end{block}
-		\begin{block}{Quantum assisted optimization}
-			Developing hybrid quantum-classical solvers for approximate optimization.
-			\\ Thermal jumps in classical algorithms to overcome energy barriers could be enhanced by invoking quantum updates.
-			\\ Particular interested in coherent population transfer.
-		\end{block}
-	\end{frame}
+%	\begin{frame}[allowframebreaks]
+%		\frametitle{Google AI Quantum}
+%		\begin{block}{Superconducting qubit processors}
+%			Superconducting qubits with chip-based scalable architecture targeting two-qubit gate error < 0.5\%. Google's Bristlecone is newest 72-qubit quantum processor\footnote{as on 2018}.
+%		\end{block}
+%		\begin{block}{Qubit metrology}
+%			Reducing two-qubit loss below 0.2\% is critical for error correction.
+%			\\ Working on a quantum supremacy experiment, to approximately sample a quantum circuit beyond the capabilities of state-of-the-art classical computers and algorithms.
+%		\end{block}
+%		\begin{block}{Quantum simulation}
+%			Simulation of physical systems is among the most anticipated applications of quantum computing.
+%			\\ quantum algorithms for modelling systems of interacting electrons with applications in chemistry and materials science.
+%		\end{block}
+%		\begin{block}{Quantum neural networks}
+%			a framework to implement a quantum neural network on near-term processors.
+%			\\ understanding advantages may arise from generate massive superposition states during operation of the network.
+%		\end{block}
+%		\begin{block}{Quantum assisted optimization}
+%			Developing hybrid quantum-classical solvers for approximate optimization.
+%			\\ Thermal jumps in classical algorithms to overcome energy barriers could be enhanced by invoking quantum updates.
+%			\\ Particular interested in coherent population transfer.
+%		\end{block}
+%	\end{frame}
 	
 	%	\begin{table}[H]
 		%	\centering
